@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bet007 · 简明使用指南与访问提醒</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #fcedd9 0%, #fadcb0 40%, #f7cb8a 100%);
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2.4rem 1.2rem;
+      color: #2d241a;
+    }
+
+    .card {
+      max-width: 820px;
+      width: 100%;
+      background: rgba(255, 252, 245, 0.92);
+      backdrop-filter: blur(3px);
+      border-radius: 48px 24px 48px 24px;
+      padding: 2.8rem 2.2rem;
+      box-shadow: 0 20px 40px -12px rgba(120, 70, 30, 0.25),
+                  0 8px 16px -6px rgba(0,0,0,0.05);
+      border: 1px solid #fff9ef;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 2.2rem;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 380;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #8b5a2b, #bc7f3f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero .sub {
+      font-size: 1.1rem;
+      color: #6f4e2e;
+      border-top: 2px dotted #dbbd9a;
+      display: inline-block;
+      padding-top: 0.5rem;
+      margin-top: 0.2rem;
+    }
+
+    .guide-block {
+      background: #f9efe4;
+      border-radius: 28px 12px 28px 12px;
+      padding: 1.8rem 1.8rem 1.4rem;
+      margin: 1.8rem 0;
+      border-left: 6px solid #dba46a;
+    }
+
+    .guide-block p {
+      margin-bottom: 0.9rem;
+      line-height: 1.7;
+      font-size: 1rem;
+      color: #3c2c1c;
+    }
+
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin: 1.6rem 0 2rem;
+    }
+
+    .highlight-item {
+      background: white;
+      border-radius: 28px 12px 28px 12px;
+      padding: 1.3rem 1.1rem;
+      box-shadow: 0 2px 6px rgba(160, 95, 40, 0.08);
+      border: 1px solid #f1e1cf;
+      transition: transform 0.15s ease;
+    }
+
+    .highlight-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px -8px rgba(150, 85, 30, 0.18);
+    }
+
+    .highlight-item h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #8b5a2b;
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .highlight-item p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #4b3926;
+    }
+
+    .scenario-note {
+      background: #fcf5eb;
+      border-radius: 32px 16px 32px 16px;
+      padding: 1.4rem 1.6rem;
+      margin: 1.8rem 0;
+      border: 1px solid #e5d2bb;
+    }
+
+    .scenario-note h2 {
+      font-weight: 400;
+      font-size: 1.4rem;
+      color: #6f4e2e;
+      margin-bottom: 0.6rem;
+    }
+
+    .scenario-note ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .scenario-note li {
+      padding: 0.5rem 0 0.5rem 1.8rem;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%23bc7f3f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>') left center no-repeat;
+      background-size: 14px;
+      margin-bottom: 0.3rem;
+    }
+
+    .faq-mini {
+      margin: 2rem 0 1.2rem;
+      background: #fffbf5;
+      border-radius: 24px 12px 24px 12px;
+      padding: 1.2rem 1.6rem;
+    }
+
+    .faq-mini details {
+      margin: 0.8rem 0;
+      border-bottom: 1px dashed #ddc9b4;
+      padding-bottom: 0.7rem;
+    }
+
+    .faq-mini summary {
+      font-weight: 500;
+      color: #6f4e2e;
+      cursor: pointer;
+      list-style: '↪  ';
+    }
+
+    .faq-mini details[open] summary {
+      list-style: '↕  ';
+    }
+
+    .faq-mini p {
+      margin-top: 0.4rem;
+      padding-left: 0.8rem;
+      color: #4b3926;
+      line-height: 1.6;
+    }
+
+    .link-sentence {
+      background: #f5e7d8;
+      border-radius: 60px;
+      padding: 0.9rem 1.6rem;
+      margin: 1.8rem 0 0.6rem;
+      text-align: center;
+      font-size: 1rem;
+      color: #3c2c1c;
+      border: 1px solid #e3cfba;
+      box-shadow: inset 0 1px 2px rgba(255, 245, 235, 0.6);
+    }
+
+    .link-sentence a {
+      background: #dba46a;
+      color: #2b1e12;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.2rem 1rem 0.3rem 1rem;
+      border-radius: 40px;
+      display: inline-block;
+      transition: all 0.15s;
+      border: 1px solid #c4884e;
+      box-shadow: 0 2px 8px rgba(180, 100, 30, 0.15);
+      letter-spacing: 0.3px;
+    }
+
+    .link-sentence a:hover {
+      background: #c99258;
+      transform: scale(1.02);
+      box-shadow: 0 4px 12px rgba(150, 75, 20, 0.2);
+    }
+
+    .link-sentence a:active {
+      transform: scale(0.96);
+    }
+
+    .footnote {
+      font-size: 0.85rem;
+      text-align: center;
+      color: #7f674f;
+      margin-top: 1.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid #e5d2bb;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 1.2rem 0.8rem;
+      }
+      .card {
+        padding: 1.5rem 1rem;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .highlight-grid {
+        grid-template-columns: 1fr;
+        gap: 0.9rem;
+      }
+      .guide-block {
+        padding: 1.2rem;
+      }
+      .link-sentence {
+        font-size: 0.95rem;
+        padding: 0.8rem 1rem;
+      }
+      .link-sentence a {
+        padding: 0.2rem 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="hero">
+      <h1>bet007 · 简明指南</h1>
+      <span class="sub">从访问方式到日常使用，一次说清</span>
+    </div>
+
+    <div class="guide-block">
+      <p><strong>先讲一个很实际的问题：</strong> 很多人第一次接触 bet007 时，最大的困惑不是功能，而是「怎么稳定打开」「如何判断信息来源」。这里整理了一份从实际角度出发的提醒与建议，不夸大也不绕弯子。</p>
+      <p>如果你正在寻找一个信息聚合方向，<strong>bet007</strong> 是值得先了解的名字——但前提是，你清楚它提供什么、适合什么场景，以及怎样访问更稳妥。下面从几个侧面展开说说。</p>
+    </div>
+
+    <div class="highlight-grid">
+      <div class="highlight-item">
+        <h3>📋 信息聚合</h3>
+        <p>bet007 本身并不生产所有内容，而是将多个来源的公开信息按时间线、赛事等维度整合，方便快速浏览和对比。适合需要快速了解动态的人。</p>
+      </div>
+      <div class="highlight-item">
+        <h3>🔍 筛选与习惯</h3>
+        <p>使用前最好先确认自己的需求：是看实时数据，还是回看历史记录？bet007 的界面偏向简洁型，初次使用建议花几分钟熟悉分类栏。</p>
+      </div>
+      <div class="highlight-item">
+        <h3>🌐 访问稳定性</h3>
+        <p>由于网络环境变化，部分区域可能出现连接波动。建议保持域名认知清晰，<strong>不要轻信非官方渠道分享的“镜像”或“加速器”</strong>，以当前实际可打开的官方说明为准。</p>
+      </div>
+      <div class="highlight-item">
+        <h3>🧭 使用时机</h3>
+        <p>适合作为信息参考的辅助工具，而非唯一决策依据。如果你需要交叉验证某些数据，可以把 bet007 当作其中一个信源窗口。</p>
+      </div>
+    </div>
+
+    <div class="scenario-note">
+      <h2>🕊️ 常见使用场景</h2>
+      <ul>
+        <li><strong>赛前预览：</strong> 快速浏览近期日程、对阵列表，搭配其他资讯做判断。</li>
+        <li><strong>动态跟新：</strong> 对于正在进行的活动，bet007 的信息刷新节奏比较及时，可以保持页面常开。</li>
+        <li><strong>历史回溯：</strong> 查找过去一段时间的记录，适合复盘或整理笔记。</li>
+        <li><strong>轻量查询：</strong> 不想打开繁重应用时，通过浏览器直接使用，省去安装步骤。</li>
+      </ul>
+    </div>
+
+    <div class="faq-mini">
+      <details>
+        <summary>bet007 需要注册或付费吗？</summary>
+        <p>不需要。bet007 的基本浏览功能是公开的，直接打开即可使用，无需注册。部分深度功能或个性化设置可能需要简单注册，但通常不涉及费用。</p>
+      </details>
+      <details>
+        <summary>为什么有时候打不开或加载慢？</summary>
+        <p>可能的原因包括：本地网络限制、DNS 缓存问题、或服务端临时调整。可以尝试更换网络环境或清除浏览器缓存。如果持续无法访问，不妨过段时间再试。</p>
+      </details>
+      <details>
+        <summary>bet007 上的信息可靠吗？</summary>
+        <p>bet007 整合的是公开来源的数据，但任何平台都无法保证 100% 零误差。建议重要决策前多方核实，尤其涉及时间敏感内容时。</p>
+      </details>
+    </div>
+
+    <div class="link-sentence">
+      如果你觉得以上说明有用，不妨直接体验一下 <a href="https://cn-bet007.com">bet007</a> —— 打开后结合自己的需求摸索几分钟，会比任何描述都更直观。
+    </div>
+
+    <div class="footnote">
+      保持理性，筛选信息，独立判断。本页仅作使用介绍，不构成任何引导或承诺。
+    </div>
+  </div>
+</body>
+</html>
