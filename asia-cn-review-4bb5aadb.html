@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>资料卡片 · pg模拟器信息索引</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      background: #f4f6f9;
+      color: #1e293b;
+      line-height: 1.5;
+    }
+
+    /* 深色头图 ———— 视觉焦点 */
+    .hero {
+      background: linear-gradient(145deg, #0f1822 0%, #1a2a3a 100%);
+      color: #e6edf5;
+      padding: 4rem 1.5rem 3.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -60%;
+      left: -20%;
+      width: 180%;
+      height: 180%;
+      background: radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.06), transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.6rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: #bcd1e6;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero .label-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0.3rem 1rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      color: #9bb8da;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(4px);
+    }
+
+    /* 浅色正文区 — 卡片网格 */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.8rem;
+    }
+
+    @media (min-width: 680px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (min-width: 1000px) {
+      .grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.8rem 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.03);
+      transition: transform 0.2s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    .card-icon {
+      font-size: 1.9rem;
+      margin-bottom: 0.6rem;
+      display: block;
+      line-height: 1;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #0f1822;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p, .card ul {
+      font-size: 0.95rem;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .card ul li {
+      padding: 0.2rem 0;
+      position: relative;
+      padding-left: 1.2rem;
+    }
+
+    .card ul li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: #3b82f6;
+      font-weight: 700;
+    }
+
+    .card--highlight {
+      border-left: 4px solid #3b82f6;
+    }
+
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    a:hover {
+      color: #1d4ed8;
+      border-bottom-color: #1d4ed8;
+    }
+
+    .inline-link {
+      background: #eef2ff;
+      padding: 0.1rem 0.3rem;
+      border-radius: 6px;
+      border-bottom: none;
+    }
+
+    .inline-link:hover {
+      background: #dbeafe;
+    }
+
+    /* 自然链接段落 */
+    .essay-section {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2rem 2rem 2.2rem;
+      margin-top: 2.5rem;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    }
+
+    .essay-section h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: #0f1822;
+      margin-bottom: 1rem;
+    }
+
+    .essay-section p {
+      margin-bottom: 1rem;
+      color: #1e293b;
+      font-size: 1rem;
+    }
+
+    .essay-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .small-note {
+      display: block;
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+      padding: 1rem 1.2rem;
+      background: #f1f5f9;
+      border-radius: 14px;
+      color: #334155;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* 响应式微调 */
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+      .hero {
+        padding: 2.8rem 1rem 2.5rem;
+      }
+      .essay-section {
+        padding: 1.5rem;
+      }
+      .card {
+        padding: 1.5rem 1.2rem;
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem 1.5rem;
+      font-size: 0.85rem;
+      color: #64748b;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 深色头图 -->
+  <div class="hero">
+    <span class="label-badge">📇 资料索引 · 信息卡片</span>
+    <h1>pg模拟器 · 用途与人群卡片式整理</h1>
+    <p>一份轻量级的信息归档，围绕模拟器的常见用途、适用人群以及内容线索展开。所有条目均来自公开资料与社区讨论的梳理。</p>
+  </div>
+
+  <!-- 正文卡片区 -->
+  <div class="container">
+    <div class="grid">
+
+      <!-- 卡片 1：主视觉用途 -->
+      <div class="card card--highlight">
+        <span class="card-icon">🔍</span>
+        <h3>主要用途</h3>
+        <ul>
+          <li>技术体验与界面预演：在本地环境中快速预览交互逻辑</li>
+          <li>功能测试与对照：用于对比不同设置下的响应差异</li>
+          <li>资料整理场景：作为案例模块纳入个人笔记或教程草稿</li>
+          <li>轻度娱乐与消遣：部分用户将其作为休闲工具使用</li>
+        </ul>
+      </div>
+
+      <!-- 卡片 2：适合人群 -->
+      <div class="card">
+        <span class="card-icon">👥</span>
+        <h3>适合人群</h3>
+        <ul>
+          <li>对模拟类工具感兴趣的学习者与爱好者</li>
+          <li>需要搭建演示环境的设计师或产品人员</li>
+          <li>内容创作者，用于录制素材或截图说明</li>
+          <li>日常浏览与资料收集阶段的普通用户</li>
+        </ul>
+      </div>
+
+      <!-- 卡片 3：信息索引 · 注意事项 -->
+      <div class="card">
+        <span class="card-icon">📌</span>
+        <h3>阅读提醒</h3>
+        <ul>
+          <li>本页为信息索引，不提供直接下载或安装包</li>
+          <li>所有描述基于公开资料与社区常见问答整理</li>
+          <li>请根据自身需求选择合适版本与运行环境</li>
+          <li>使用前建议查阅官方文档或帮助页面</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 自然链接段落（避免硬广，流畅嵌入） -->
+    <div class="essay-section">
+      <h2>关于「pg模拟器」的资料脉络</h2>
+      <p>
+        在整理模拟器相关的资料时，我们注意到许多用户首先会搜索“模拟器怎么用”“适合哪些场景”这类问题。实际上，从信息检索的角度看，提前了解工具的定位和边界，能节省不少筛选时间。如果你正在了解这个方向，可以先去 <a href="https://asia-cn-pg.com" class="inline-link">pg模拟器</a> 的主页浏览一下基础介绍，那里通常有比较清晰的概述和功能列表。
+      </p>
+      <p>
+        另外，社区里的讨论帖、对比评测也值得留意——很多细节在官方文档里可能一笔带过，但实际使用中却很重要。比如不同系统版本下的兼容性、资源占用情况等，都属于实用信息。本页作为一份轻量卡片索引，希望帮你快速建立框架，后续深入时更有方向。
+      </p>
+      <div class="small-note">
+        💡 小提示：如果你已经初步了解过 <a href="https://asia-cn-pg.com" class="inline-link">pg模拟器</a>，不妨将本页视为一张“信息地图”——卡片中的条目可以当作笔记大纲的起点，根据你的实际兴趣再做扩展。
+      </div>
+    </div>
+
+    <!-- FAQ 摘要（简略） -->
+    <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+      <div style="background: #ffffff; border-radius: 16px; padding: 1rem 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03); flex: 1 1 200px; text-align: center;">
+        <span style="font-size: 1.3rem; display: block;">❓</span>
+        <span style="font-weight: 500; font-size: 0.95rem;">是否需要安装？</span>
+        <p style="font-size: 0.85rem; color: #475569; margin-top: 0.3rem;">通常根据平台选择对应包体，具体见官网说明。</p>
+      </div>
+      <div style="background: #ffffff; border-radius: 16px; padding: 1rem 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03); flex: 1 1 200px; text-align: center;">
+        <span style="font-size: 1.3rem; display: block;">📂</span>
+        <span style="font-weight: 500; font-size: 0.95rem;">资源占用如何？</span>
+        <p style="font-size: 0.85rem; color: #475569; margin-top: 0.3rem;">不同版本有差异，建议参考社区配置讨论。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 极简页脚 -->
+  <footer>
+    <span>信息整理卡片 · 仅供索引参考</span><br>
+    <span style="font-size: 0.8rem; color: #94a3b8;">内容基于公开资料汇编，不构成任何引导或承诺</span>
+  </footer>
+
+</body>
+</html>
